@@ -4,6 +4,7 @@ import TopNav from "../components/TopNav";
 import StatusBadge from "../components/StatusBadge";
 import ComplianceRing from "../components/ComplianceRing";
 import ChecklistItem from "../components/ChecklistItem";
+import VendorCurePortalModal from "../components/VendorCurePortalModal";
 import {
   getTenderById,
   getBiddersForTender,
@@ -32,6 +33,9 @@ export default function BidderAnalysis() {
   const [uploadModalOpen, setUploadModalOpen] = useState(false);
   const [uploadFile, setUploadFile] = useState(null);
   const [uploading, setUploading] = useState(false);
+
+  // Cure notice modal state
+  const [cureModalOpen, setCureModalOpen] = useState(false);
 
   useEffect(() => {
     getTenderById(tenderId).then(setTender);
@@ -306,7 +310,7 @@ export default function BidderAnalysis() {
                 </button>
                 <button
                   disabled={submitting}
-                  onClick={() => handleDecision("request_correction")}
+                  onClick={() => setCureModalOpen(true)}
                   className="rounded-md border border-status-warn px-4 py-2 text-sm font-semibold text-status-warn hover:bg-status-warn-bg disabled:opacity-50"
                 >
                   Request Correction
@@ -423,6 +427,20 @@ export default function BidderAnalysis() {
             </form>
           </div>
         </div>
+      )}
+
+      {/* Vendor Cure Portal Modal */}
+      {cureModalOpen && (
+        <VendorCurePortalModal
+          isOpen={cureModalOpen}
+          onClose={() => setCureModalOpen(false)}
+          bidderId={selectedBidderId}
+          tenderId={tenderId}
+          onNoticeSent={() => {
+            setCureModalOpen(false);
+            handleDecision("request_correction");
+          }}
+        />
       )}
     </div>
   );

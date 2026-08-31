@@ -8,7 +8,8 @@ import app.models
 from app.routers import (
     tenders_router, bidders_router, documents_router,
     verdicts_router, dashboard_router, audit_router,
-    auth_router, reports_router
+    auth_router, reports_router, copilot_router,
+    ocr_studio_router, batch_analyzer_router
 )
 
 # Create SQLite database tables if they do not exist
@@ -44,6 +45,9 @@ app.include_router(documents_router)
 app.include_router(verdicts_router)
 app.include_router(reports_router)
 app.include_router(audit_router)
+app.include_router(copilot_router)
+app.include_router(ocr_studio_router)
+app.include_router(batch_analyzer_router)
 
 @app.get("/", tags=["Health"])
 def root():

@@ -7,6 +7,9 @@ import AuditTrail from "./pages/AuditTrail";
 import TendersPage from "./pages/TendersPage";
 import BiddersPage from "./pages/BiddersPage";
 import VerificationPage from "./pages/VerificationPage";
+import RemediationCopilot from "./pages/RemediationCopilot";
+import DocumentOCRStudio from "./pages/DocumentOCRStudio";
+import BatchBidAnalyzer from "./pages/BatchBidAnalyzer";
 
 export default function App() {
   return (
@@ -28,6 +31,11 @@ export default function App() {
         {/* AI Verification Pipeline page */}
         <Route path="/verification" element={<VerificationPage />} />
 
+        {/* SIH 2026 Innovation Modules */}
+        <Route path="/copilot" element={<RemediationCopilot />} />
+        <Route path="/ocr-studio" element={<DocumentOCRStudio />} />
+        <Route path="/batch-analyzer" element={<BatchBidAnalyzer />} />
+
         {/* Security intelligence */}
         <Route path="/security" element={<SecurityInsights />} />
 
@@ -43,3 +51,4 @@ export default function App() {
     </BrowserRouter>
   );
 }
+
