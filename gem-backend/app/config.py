@@ -17,6 +17,8 @@ BIDDER_UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 # Database
 DATABASE_PATH = BASE_DIR / "gem_compliance.db"
 DATABASE_URL = os.getenv("DATABASE_URL", f"sqlite:///{DATABASE_PATH.as_posix()}")
+if DATABASE_URL.startswith("postgres://"):
+    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
 
 # App Settings
 APP_TITLE = "GeM AI Bid Compliance Verification Platform"
