@@ -85,7 +85,7 @@ export default function TendersPage() {
       const data = await fetchTenders();
       setTenders(data);
     } catch (e) {
-      showToast("Could not reach backend. Showing fallback data.", "warn");
+      // showToast("Could not reach backend. Showing fallback data.", "warn");
       setTenders(FALLBACK_TENDERS);
     } finally {
       setLoading(false);

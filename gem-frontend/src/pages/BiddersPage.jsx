@@ -77,7 +77,7 @@ export default function BiddersPage() {
       setBidders(allBidders.length ? allBidders : FALLBACK_BIDDERS);
     } catch (e) {
       setBidders(FALLBACK_BIDDERS);
-      showToast("Using cached bidder data (backend offline).", "warn");
+      // showToast("Using cached bidder data (backend offline).", "warn");
     } finally {
       setLoading(false);
     }
