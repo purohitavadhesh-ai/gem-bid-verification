@@ -235,11 +235,28 @@ export async function login(email, password) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
     });
-    if (res.ok) return await res.json();
+    if (res.ok) {
+      const data = await res.json();
+      localStorage.setItem("auth_token", data.token || "mock-token");
+      localStorage.setItem("user", JSON.stringify(data.officer || currentOfficer));
+      return data;
+    }
   } catch (e) {
     console.warn("Using local fallback for login", e);
   }
-  return { token: "mock-token", officer: currentOfficer };
+  const fallback = { token: "mock-token", officer: currentOfficer };
+  localStorage.setItem("auth_token", fallback.token);
+  localStorage.setItem("user", JSON.stringify(fallback.officer));
+  return fallback;
+}
+
+export function logout() {
+  localStorage.removeItem("auth_token");
+  localStorage.removeItem("user");
+}
+
+export function isAuthenticated() {
+  return !!localStorage.getItem("auth_token");
 }
 
 // POST /tenders/{id}/bidders/{bidderId}/decision
